@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1143192621C1168B0002DC45 /* ItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143192421C1168B0002DC45 /* ItemEntity+CoreDataClass.swift */; };
+		1143192721C1168B0002DC45 /* ItemEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1143192521C1168B0002DC45 /* ItemEntity+CoreDataProperties.swift */; };
 		1152D14321BC48E10013BDD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D14221BC48E10013BDD6 /* AppDelegate.swift */; };
 		1152D14521BC48E10013BDD6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D14421BC48E10013BDD6 /* ViewController.swift */; };
 		1152D14821BC48E10013BDD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1152D14621BC48E10013BDD6 /* Main.storyboard */; };
@@ -20,7 +22,6 @@
 		1152D17821BC4AFA0013BDD6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D17721BC4AFA0013BDD6 /* ViewModel.swift */; };
 		1152D17A21BC4CAA0013BDD6 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D17921BC4CAA0013BDD6 /* SearchModel.swift */; };
 		1152D17F21BC74120013BDD6 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D17E21BC74120013BDD6 /* ItemModel.swift */; };
-		1152D18121BC741F0013BDD6 /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1152D18021BC741F0013BDD6 /* ItemEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1143192421C1168B0002DC45 /* ItemEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1143192521C1168B0002DC45 /* ItemEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1152D13F21BC48E10013BDD6 /* TodoMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1152D14221BC48E10013BDD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1152D14421BC48E10013BDD6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +63,6 @@
 		1152D17721BC4AFA0013BDD6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		1152D17921BC4CAA0013BDD6 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		1152D17E21BC74120013BDD6 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
-		1152D18021BC741F0013BDD6 /* ItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,9 +148,10 @@
 		1152D17B21BC71780013BDD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1143192421C1168B0002DC45 /* ItemEntity+CoreDataClass.swift */,
+				1143192521C1168B0002DC45 /* ItemEntity+CoreDataProperties.swift */,
 				1152D17921BC4CAA0013BDD6 /* SearchModel.swift */,
 				1152D17E21BC74120013BDD6 /* ItemModel.swift */,
-				1152D18021BC741F0013BDD6 /* ItemEntity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -303,13 +306,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1152D17821BC4AFA0013BDD6 /* ViewModel.swift in Sources */,
+				1143192621C1168B0002DC45 /* ItemEntity+CoreDataClass.swift in Sources */,
 				1152D14521BC48E10013BDD6 /* ViewController.swift in Sources */,
+				1143192721C1168B0002DC45 /* ItemEntity+CoreDataProperties.swift in Sources */,
 				1152D17521BC496D0013BDD6 /* TableViewCell.swift in Sources */,
 				1152D17A21BC4CAA0013BDD6 /* SearchModel.swift in Sources */,
 				1152D14321BC48E10013BDD6 /* AppDelegate.swift in Sources */,
 				1152D17F21BC74120013BDD6 /* ItemModel.swift in Sources */,
 				1152D14B21BC48E10013BDD6 /* TodoMVVM.xcdatamodeld in Sources */,
-				1152D18121BC741F0013BDD6 /* ItemEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

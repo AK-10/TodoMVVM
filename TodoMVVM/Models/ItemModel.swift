@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum ItemResult<T> {
     case success(T)
@@ -16,6 +17,9 @@ enum ItemResult<T> {
 enum ItemModelError: Error {
     case invalidText
     case failRemove
+    case failFetch
+    case failCreate
+    case contextError
 }
 
 protocol ItemModelProtocol {
@@ -33,11 +37,32 @@ extension ItemModelProtocol { // 仮置き
 }
 
 final class ItemModel: ItemModelProtocol {
-    private static var items: [ItemEntity] = [] //store
+//    private static var items: [ItemEntity] = [] //store
+    public var context: NSManagedObjectContext?
+    
+    init() {
+        self.context = nil
+    }
+    
+    init(context: NSManagedObjectContext) {
+        self.context = context
+    }
     
     func getData() -> ItemResult<[ItemEntity]> {
-        return .success(ItemModel.items)
+        let fetchRequest: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
+        guard let context = context else {
+            return .failure(ItemModelError.failFetch)
+        }
+        do {
+            let items = try context.fetch(fetchRequest) as [ItemEntity]
+            return .success(items)
+        } catch let e {
+            print("Error: \(e)")
+            return .failure(ItemModelError.failFetch)
+        }
+
     }
+    
     
     func createData(text: String?) -> ItemResult<ItemEntity> {
         switch text {
@@ -47,11 +72,22 @@ final class ItemModel: ItemModelProtocol {
             if text.isEmpty {
                 return .failure(ItemModelError.invalidText)
             } else {
-                // DBへ書き込みして結果を返す
-                let id = (ItemModel.items.last?.id ?? 0) + 1
-                let item = ItemEntity(id: id, text: text)
-                ItemModel.items.append(item)
-                return .success(item)
+                guard let context = self.context else {
+                    return .failure(ItemModelError.contextError)
+                }
+                let request: NSFetchRequest<ItemEntity> = ItemEntity.fetchRequest()
+                request.sortDescriptors = [NSSortDescriptor(key: ItemEntity.key.id.rawValue, ascending: false)]
+                request.fetchLimit = 1
+                do {
+                    let newId = (try context.fetch(request).first?.id ?? 0) + 1
+                    let item: ItemEntity = ItemEntity(context: context)
+                    item.id = newId
+                    item.text = text
+                    return .success(item)
+                } catch let e {
+                    print("failCreate: \(e)")
+                    return .failure(ItemModelError.failCreate)
+                }
             }
         }
     }
@@ -61,8 +97,16 @@ final class ItemModel: ItemModelProtocol {
         case .none:
             return .failure(ItemModelError.invalidText)
         case .some(let text):
-            let results = ItemModel.items.filter{ $0.text.contains(text) }
-            return .success(results)
+//            let results = ItemModel.items.filter{ $0.text.contains(text) }
+            guard let context = self.context else {
+                return .failure(ItemModelError.contextError)
+            }
+            
+            let item = NSManagedObjectContext()
+            item.setValue("text", forKey: "text")
+            item.setValue(1, forKey: "id")
+//            return .success(results)
+            return .success([ItemEntity(context: item)])
         }
     }
 }

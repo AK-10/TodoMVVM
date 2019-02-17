@@ -14,8 +14,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var addButton: UIButton!
     
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     private let notificationCenter = NotificationCenter()
-    private lazy var viewModel = ViewModel(notificationCenter: notificationCenter)
+    private lazy var viewModel = ViewModel(notificationCenter: notificationCenter, itemModel: ItemModel(context: context))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +75,7 @@ extension ViewModel: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
         let item = self.items[indexPath.item]
-        cell.setup(text: item.text)
+        cell.setup(text: item.text ?? "error")
         return cell
     }
 }

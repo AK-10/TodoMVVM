@@ -9,7 +9,8 @@
 import Foundation
 
 enum SearchResult<T> {
-    case success(T)
+    case found(T)
+    case all(T)
     case failure(Error)
 }
 
@@ -28,11 +29,10 @@ final class SearchModel: SearchModelProtocol {
         case .none:
             return .failure(SearchModelError.invalidText)
         case .some(let text):
-            switch text {
-            case "":
-                return .failure(SearchModelError.invalidText)
-            default:
-                return .success(())
+            if text.isEmpty {
+                return .all(())
+            } else {
+                return .found(())
             }
         }
     }

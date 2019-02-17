@@ -31,17 +31,27 @@ final class ViewModel: NSObject {
         print("vm: search")
         let result = searchModel.validate(text: text)
         switch result {
-        case .success:
+        case .found:
             let filtered = itemModel.searchData(contains: text)
             switch filtered {
             case .success(let items):
                 print("vm:search:success")
                 self.items.removeAll()
                 self.items.append(contentsOf: items)
-                notificationCenter.post(name: changeText, object: filtered)
+                notificationCenter.post(name: changeText, object: nil)
             case .failure(let error as ItemModelError):
                 print("error: \(error)")
                 notificationCenter.post(name: changeText, object: error.errorObject)
+            case _:
+                fatalError("Unexpected pattern.")
+            }
+        case .all:
+            switch itemModel.getData() {
+            case .success(let items):
+                self.items.removeAll()
+                self.items.append(contentsOf: items)
+            case .failure(let err as ItemModelError):
+                notificationCenter.post(name: changeText, object: err.errorObject)
             case _:
                 fatalError("Unexpected pattern.")
             }
